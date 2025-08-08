@@ -30,7 +30,7 @@ export default function EventRegistrationForm() {
   // Initialize EmailJS
   useEffect(() => {
     emailjs.init(
-      process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "VtHAmcrL_HSci02if"
+      process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "zNrPOtEtGnapxcxSV"
     );
   }, []);
 
@@ -56,8 +56,12 @@ export default function EventRegistrationForm() {
       const templateParams = {
         from_name: `${formData.firstName} ${formData.lastName}`,
         from_email: formData.email,
+        to_email: "blertajusufi10@gmail.com",
         phone: formData.phone,
+        debug: true,
         additional_info: formData.additionalInfo || "Keine Angabe",
+        timestamp: new Date().toLocaleString("de-DE"),
+
         to_name: "Veranstaltungsorganisator",
         message: `
           Neue Veranstaltungsanmeldung:
@@ -72,13 +76,15 @@ export default function EventRegistrationForm() {
           Eingereicht am: ${new Date().toLocaleString()}
         `,
       };
+      console.log("Sending with params:", templateParams);
 
       // Send email using EmailJS
       const result = await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "service_h6oi7tm",
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "template_wd85mvo",
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "service_1obrekj",
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "template_e77l8lm",
         templateParams,
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "VtHAmcrL_HSci02if"
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "zNrPOtEtGnapxcxSV"
+        // process.env.NEXT_PUBLIC_EMAILJS_PRIVATE_KEY || "TYKohNAQQRIrXCtQ6YCiT"
       );
 
       if (result.status === 200) {
@@ -225,16 +231,16 @@ export default function EventRegistrationForm() {
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <User className="h-4 w-4 text-gray-800" />
                   </div>
-              <input
-  type="text"
-  id="firstName"
-  name="firstName"
-  required
-  value={formData.firstName}
-  onChange={handleInputChange}
-  className="w-full pl-9 py-2 sm:py-2 lg:py-2.5 pr-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#669933] focus:border-transparent transition-all duration-200 bg-white text-gray-800 text-sm sm:text-sm lg:text-base placeholder-gray-400"
-  placeholder="Ihr Vorname"
-/>
+                  <input
+                    type="text"
+                    id="firstName"
+                    name="firstName"
+                    required
+                    value={formData.firstName}
+                    onChange={handleInputChange}
+                    className="w-full pl-9 py-2 sm:py-2 lg:py-2.5 pr-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#669933] focus:border-transparent transition-all duration-200 bg-white text-gray-800 text-sm sm:text-sm lg:text-base placeholder-gray-400"
+                    placeholder="Ihr Vorname"
+                  />
                 </div>
               </div>
 
@@ -249,7 +255,7 @@ export default function EventRegistrationForm() {
                   <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <User className="h-4 w-4 text-gray-800" />
                   </span>
-                    <input
+                  <input
                     type="text"
                     id="lastName"
                     name="lastName"
@@ -275,7 +281,7 @@ export default function EventRegistrationForm() {
                   <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <Mail className="h-4 w-4 text-gray-800" />
                   </span>
-                   <input
+                  <input
                     type="email"
                     id="email"
                     name="email"
@@ -299,7 +305,7 @@ export default function EventRegistrationForm() {
                   <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <Phone className="h-4 w-4 text-gray-800" />
                   </span>
-                   <input
+                  <input
                     type="tel"
                     id="phone"
                     name="phone"
