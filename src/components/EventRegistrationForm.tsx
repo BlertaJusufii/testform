@@ -56,7 +56,7 @@ export default function EventRegistrationForm() {
       const templateParams = {
         from_name: `${formData.firstName} ${formData.lastName}`,
         from_email: formData.email,
-        to_email: "blertajusufi10@gmail.com",
+        // to_email: "blertajusufi10@gmail.com",
         phone: formData.phone,
         debug: true,
         additional_info: formData.additionalInfo || "Keine Angabe",
